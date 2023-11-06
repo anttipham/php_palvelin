@@ -1,4 +1,4 @@
-# DATA.DB.200 Tietokantajarjestelmat SQL
+# DATA.DB.200 Tietokantajärjestelmät SQL
 
 Trash repository for getting files to the server.
 

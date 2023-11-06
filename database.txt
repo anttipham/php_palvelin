@@ -1,0 +1,5 @@
+Tietokantakurssien harjoitustyöpalvelin
+
+Tietokantasi nimi: nxanph
+Tietokannan omistajan postgresql tunnus: nxanph
+Tietokannan omistajan postgresql salasana: ezd6XpnRIzkK9nq
