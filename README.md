@@ -9,6 +9,13 @@ ssh nxanph@linux-ssh.tuni.fi
 ssh tie-tkannat.it.tuni.fi
 ```
 
+## PostgreSQL
+
+```bash
+psql nxanph
+ezd6XpnRIzkK9nq
+```
+
 ## SSH-tunnelin luominen
 
 ```bash
