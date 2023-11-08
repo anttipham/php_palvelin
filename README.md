@@ -13,7 +13,7 @@ ssh tie-tkannat.it.tuni.fi
 
 ```bash
 ssh -f nxanph@linux-ssh.tuni.fi -L 7777:tie-tkannat.it.tuni.fi:80 -N
-ssh -L 7777:tie-tkannat.it.tuni.fi:80 nxanph@linux-ssh.tuni.fi
+ssh -L 7777:tie-tkannat.it.tuni.fi:80 nxanph@linux-ssh.tuni.fi -N -f
 ```
 
 URL: <http://localhost:7777/nxanph/testi2.php>
