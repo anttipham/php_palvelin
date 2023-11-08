@@ -10,7 +10,7 @@
 // Tulostaa ennaltamaaratyn kyselyn WWW-sivulle
 //echo "Tietokannassa olevat opiskelijat. <br /><br />";
 
-$y_tiedot = "dbname=tiko user=tiko password=salasana";
+$y_tiedot = "dbname=nxanph user=nxanph password=ezd6XpnRIzkK9nq";
 
 if (!$yhteys = pg_connect($y_tiedot))
    die("Tietokantayhteyden luominen epäonnistui.");
