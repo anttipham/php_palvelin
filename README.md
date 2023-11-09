@@ -20,7 +20,10 @@ ezd6XpnRIzkK9nq
 
 ```bash
 ssh -f nxanph@linux-ssh.tuni.fi -L 7777:tie-tkannat.it.tuni.fi:80 -N
-ssh -L 7777:tie-tkannat.it.tuni.fi:80 nxanph@linux-ssh.tuni.fi -N -f
+ssh -f nxanph@linux-ssh.tuni.fi -L 7777:tie-tkannat.it.tuni.fi:443 -N
+ssh  -L 7777:tie-tkannat.it.tuni.fi:80 nxanph@linux-ssh.tuni.fi -f -N
+ssh  -L 7777:tie-tkannat.it.tuni.fi:443 nxanph@linux-ssh.tuni.fi -f -N
 ```
 
-URL: <http://localhost:7777/nxanph/testi2.php>
+URL: <https://tie-tkannat.it.tuni.fi/~nxanph/testi1.php>
+URL: <https://localhost:7777/~nxanph/testi1.php>
