@@ -19,6 +19,11 @@
         // Lisää tietokantaan
         $lisays_kysely = "INSERT INTO jasenyys (nro, nimi)
                           VALUES ('$suurin_nro', '$nimi')";
+        $lisays = pg_query($lisays_kysely);
+
+        if (!$lisays && (pg_affected_rows($lisays) == 0)) {
+            die("Jäsenyyden lisäys epäonnistui.");
+        }
 
         header("Location: tervetuloaanargisti.php");
     }
