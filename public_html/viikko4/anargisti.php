@@ -9,7 +9,7 @@
 
     // POST käsittelijä
     if (!empty($_POST["nimi"])) {
-        $nimi = pg_escape_string($_POST("nimi"));
+        $nimi = pg_escape_string($_POST["nimi"]);
         header("Location: tervetuloaanargisti.php");
     }
 
