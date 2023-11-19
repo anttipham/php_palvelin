@@ -16,8 +16,7 @@
         $suurin_nro = pg_fetch_row($suurin_nro_vastaus)[0]
 
         // Lisää tietokantaan
-        $lisays_kysely = "INSERT INTO jasenyys (nro, nimi)
-                          VALUES ('$suurin_nro', '$nimi')";
+        $lisays_kysely = "INSERT INTO jasenyys (nro, nimi) VALUES ('$suurin_nro', '$nimi')";
 
         header("Location: tervetuloaanargisti.php");
     }
