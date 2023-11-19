@@ -11,12 +11,14 @@
     if (!empty($_POST["nimi"])) {
         $nimi = pg_escape_string($_POST["nimi"]);
         // Hae tietokannasta suurin nro
-        $suurin_nro_kysely = "SELECT COALESCE(MAX(nro), 1) + 1 uusi_nro FROM jasenyys";
+        $suurin_nro_kysely = "SELECT COALESCE(MAX(nro), 1) + 1 uusi_nro
+                              FROM jasenyys";
         $suurin_nro_vastaus = pg_query($suurin_nro_kysely);
-        $suurin_nro = pg_fetch_row($suurin_nro_vastaus)[0]
+        $suurin_nro = pg_fetch_row($suurin_nro_vastaus)[0];
 
         // Lisää tietokantaan
-        $lisays_kysely = "INSERT INTO jasenyys (nro, nimi) VALUES ('$suurin_nro', '$nimi')";
+        $lisays_kysely = "INSERT INTO jasenyys (nro, nimi)
+                          VALUES ('$suurin_nro', '$nimi')";
 
         header("Location: tervetuloaanargisti.php");
     }
