@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
 <?php
+    session_start();
+
     $y_tiedot = "dbname=nxanph user=nxanph password=ezd6XpnRIzkK9nq";
 
     if (!$yhteys = pg_connect($y_tiedot)) {
@@ -11,7 +13,7 @@
     if (!empty($_POST["nimi"])) {
         $nimi = pg_escape_string($_POST["nimi"]);
         // Hae tietokannasta suurin nro
-        $suurin_nro_kysely = "SELECT COALESCE(MAX(nro), 1) + 1 uusi_nro
+        $suurin_nro_kysely = "SELECT COALESCE(MAX(nro), 0) + 1 uusi_nro
                               FROM jasenyys";
         $suurin_nro_vastaus = pg_query($suurin_nro_kysely);
         $suurin_nro = pg_fetch_row($suurin_nro_vastaus)[0];
@@ -24,6 +26,10 @@
         if (!$lisays && (pg_affected_rows($lisays) == 0)) {
             die("Jäsenyyden lisäys epäonnistui.");
         }
+
+        // Tallenna sessiomuuttujat
+        $_SESSION["nimi"] = $nimi;
+        $_SESSION["nro"] = $suurin_nro;
 
         header("Location: tervetuloaanargisti.php");
     }
