@@ -14,7 +14,7 @@
         <div><input type="text" name="veloitettava" /></div>
         <div><label for="saaja">Saajan tilinumero:</label></div>
         <div><input type="text" name="saaja" /></div>
-        <div><input type="submit" value="Siirrä"></div>
+        <div><input type="submit" name="siirra" value="Siirrä"></div>
     </form>
 </body>
 <?php
@@ -25,6 +25,9 @@
     //     or die("Tietokantayhteyden luominen epäonnistui.");
 
     // POST käsittelijä
+    if (!isset($_POST["siirra"])) {
+        die();
+    }
     $summa = intval($_POST["summa"]);
     $veloitettava = trim(pg_escape_string($_POST["veloitettava"]));
     $saaja = trim(pg_escape_string($_POST["saaja"]));
