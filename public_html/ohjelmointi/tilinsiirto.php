@@ -26,6 +26,11 @@
         or die("Tietokantayhteyden luominen epäonnistui.");
 
     // POST käsittelijä
-    // if ($_POST[""]
+    $summa = intval($_POST["summa"]);
+    $veloitettava = trim(pg_escape_string($_POST["veloitettava"]));
+    $saaja = trim(pg_escape_string($_POST["saaja"]));
+    if (empty($summa) || empty($veloitettava) || empty($saaja)) {
+        die("Täytä kaikki kentät.");
+    }
 ?>
 </html>
