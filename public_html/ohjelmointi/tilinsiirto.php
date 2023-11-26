@@ -18,12 +18,11 @@
     </form>
 </body>
 <?php
-    die("Tietokantayhteyden luominen epäonnistui.");
-    session_start();
+    // session_start();
 
-    $y_tiedot = "dbname=nxanph user=nxanph password=ezd6XpnRIzkK9nq";
-    $yhteys = pg_connect($y_tiedot)
-        or die("Tietokantayhteyden luominen epäonnistui.");
+    // $y_tiedot = "dbname=nxanph user=nxanph password=ezd6XpnRIzkK9nq";
+    // $yhteys = pg_connect($y_tiedot)
+    //     or die("Tietokantayhteyden luominen epäonnistui.");
 
     // POST käsittelijä
     $summa = intval($_POST["summa"]);
