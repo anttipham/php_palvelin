@@ -21,9 +21,10 @@
     session_start();
 
     $y_tiedot = "dbname=nxanph user=nxanph password=ezd6XpnRIzkK9nq";
-    // $yhteys = pg_connect($y_tiedot)
-    //     or die("Tietokantayhteyden luominen epäonnistui.");
+    $yhteys = pg_connect($y_tiedot)
+        or die("Tietokantayhteyden luominen epäonnistui.");
 
+    // TODO: tarkista, että transaktiot toimivat ilman rollbackejä
     function post_kasittelija() {
         // POST käsittelijä
         if (!isset($_POST["siirra"])) {
