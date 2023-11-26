@@ -41,10 +41,10 @@
         pg_query("BEGIN") or die("Virhe: " . pg_last_error());
         // Tarkista että tilit ovat olemassa
         $veloitettava = pg_query(
-            "SELECT summa FROM Tilit WHERE tilinumero = '$veloitettava_nro'"
+            "SELECT summa, omistaja FROM Tilit WHERE tilinumero = '$veloitettava_nro'"
         ) or die("Virhe: " . pg_last_error());
         $saaja = pg_query(
-            "SELECT summa FROM Tilit WHERE tilinumero = '$saaja_nro'"
+            "SELECT summa, omistaja FROM Tilit WHERE tilinumero = '$saaja_nro'"
         ) or die("Virhe: " . pg_last_error());
         if (pg_num_rows($veloitettava) == 0) {
             // pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
@@ -67,6 +67,14 @@
         ) or die("Virhe: " . pg_last_error());
 
         pg_query("COMMIT") or die("Virhe: " . pg_last_error());
+
+        // Tallenna sessiomuuttujiin
+        $_SESSION["veloitettavan_nimi"] = pg_fetch_row($veloitettava)[1];
+        $_SESSION["saajan_nimi"] = pg_fetch_row($saaja)[1];
+        $_SESSION["summa"] = $summa;
+
+        // Siirry onnistumissivulle
+        header("Location: tilinsiirto_onnistui.php");
     }
     post_kasittelija();
     pg_close($yhteys);
