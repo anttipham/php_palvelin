@@ -7,15 +7,14 @@
 <body>
     <h1>Tilinsiirto</h1>
 
-
     <form action="tilinsiirto.php" method="post">
-        <label for="summa">Siirrettävä summa:</label>
-        <input type="number" name="summa" />
-        <label for="veloitettava">Veloitettavan tilinumero:</label>
-        <input type="text" name="veloitettava" />
-        <label for="saaja">Saajan tilinumero:</label>
-        <input type="text" name="saaja" />
-        <input type="submit" value="Siirrä">
+        <div><label for="summa">Siirrettävä summa:</label></div>
+        <div><input type="number" name="summa" /></div>
+        <div><label for="veloitettava">Veloitettavan tilinumero:</label></div>
+        <div><input type="text" name="veloitettava" /></div>
+        <div><label for="saaja">Saajan tilinumero:</label></div>
+        <div><input type="text" name="saaja" /></div>
+        <div><input type="submit" value="Siirrä"></div>
     </form>
 </body>
 <?php
