@@ -63,6 +63,7 @@
         "UPDATE Tilit SET summa = summa - $summa WHERE tilinumero = '$veloitettava_nro';
         UPDATE Tilit SET summa = summa + $summa WHERE tilinumero = '$saaja_nro';"
     ) or die("Virhe: " . pg_last_error());
+    echo $muutokset;
     if (pg_affected_rows($muutokset) == 1) {
         pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
         die("Veloitettava ja saaja eivät voi olla samat.");
