@@ -52,26 +52,24 @@
         die("Saajan tili ei ole olemassa.");
     }
 
-    // Tarkista että veloitettavalla tilillä on tarpeeksi rahaa
-    $veloitettavan_summa = pg_fetch_row($veloitettava)[0];
-    if ($veloitettavan_summa < $summa) {
+    // Vähennä summa veloitettavalta tililtä
+    $muutos = pg_query(
+        "UPDATE Tilit SET summa = summa - $summa
+        WHERE tilinumero = '$veloitettava_nro' AND summa >= $summa;"
+    ) or die("Virhe: " . pg_last_error());
+    if (pg_affected_rows($muutos) == 0) {
+        pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
         die("Veloitettavalla tilillä ei ole tarpeeksi rahaa.");
     }
-
-    // Siirrä summa toiselle tilille
-    $muutokset = pg_query(
-        "UPDATE Tilit SET summa = summa - $summa WHERE tilinumero = '$veloitettava_nro';
-        UPDATE Tilit SET summa = summa + $summa WHERE tilinumero = '$saaja_nro';"
+    // Lisää summa saajan tilille
+    $muutos = pg_query(
+        "UPDATE Tilit SET summa = summa + $summa WHERE tilinumero = '$saaja_nro';"
     ) or die("Virhe: " . pg_last_error());
-    echo $muutokset;
-    if (pg_affected_rows($muutokset) == 1) {
+    if (pg_affected_rows($muutos) == 0) {
         pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
-        die("Veloitettava ja saaja eivät voi olla samat.");
+        die("Virhe saajan päivityksessä.");
     }
-    if (pg_affected_rows($muutokset) != 2) {
-        pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
-        die("Tilinsiirto epäonnistui.");
-    }
+    // Kommitoi transaktio
     pg_query("COMMIT") or die("Virhe: " . pg_last_error());
 
     // Tallenna sessiomuuttujiin
