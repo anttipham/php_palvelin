@@ -37,7 +37,7 @@
 
     // SQL-transaktio
     pg_query("BEGIN") or die("Virhe: " . pg_last_error());
-    
+
     // Tarkista että tilit ovat olemassa
     $veloitettava = pg_query(
         "SELECT summa, omistaja FROM Tilit WHERE tilinumero = '$veloitettava_nro'"
@@ -63,6 +63,10 @@
         "UPDATE Tilit SET summa = summa - $summa WHERE tilinumero = '$veloitettava_nro';
         UPDATE Tilit SET summa = summa + $summa WHERE tilinumero = '$saaja_nro';"
     ) or die("Virhe: " . pg_last_error());
+    if (pg_affected_rows($muutokset) == 1) {
+        pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
+        die("Veloitettava ja saaja eivät voi olla samat.");
+    }
     if (pg_affected_rows($muutokset) != 2) {
         pg_query("ROLLBACK") or die("Virhe: " . pg_last_error());
         die("Tilinsiirto epäonnistui.");
